@@ -1,0 +1,7 @@
+path: '/content/drive/MyDrive/Detect_person/dataset/'
+train: 'train/images'
+val: 'valid/images'
+
+# class names
+names:
+  0: 'person'
