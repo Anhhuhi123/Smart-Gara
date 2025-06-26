@@ -1,27 +1,26 @@
-# Tổng quan dự án
-Dự án được xây dựng với mục tiêu tự động hóa việc kiểm soát và bảo vệ khu vực để xe tại các hộ gia đình, nhà trọ, hoặc khu dân cư nhỏ, bằng cách ứng dụng Trí tuệ nhân tạo (AI) kết hợp với các thiết bị phần cứng chi phí thấp.
+# Project Overview
+The project is built with the goal of automating the control and protection of parking areas in households, boarding houses, or small residential areas, by applying Artificial Intelligence (AI) combined with low-cost hardware devices.
 
-Hệ thống sử dụng Raspberry Pi 4 làm trung tâm điều khiển, kết nối với nhiều thiết bị như camera, vi điều khiển Arduino, cảm biến, đèn và động cơ. Ba chức năng AI chính bao gồm:
+The system uses Raspberry Pi 4 as the control center, connecting to many devices such as cameras, Arduino microcontrollers, sensors, lights and motors. The three main AI functions include:
 
-✅ 1. Nhận diện khuôn mặt – Mở cửa tự động
-Sử dụng thư viện face_recognition với mô hình backbone ResNet-34 để trích xuất embedding khuôn mặt và so sánh.
+✅ 1. Face recognition - Automatic door opening
+Using the face_recognition library with the ResNet-34 backbone model to extract facial embedding and compare.
 
-Để đảm bảo độ chính xác cao, người dùng hợp lệ cần cung cấp từ 5–10 ảnh khuôn mặt trong điều kiện ánh sáng tốt và rõ nét.
+To ensure high accuracy, valid users need to provide 5-10 facial images in good and clear lighting conditions.
 
-Khi camera nhận diện được người hợp lệ, hệ thống sẽ kích hoạt cơ cấu mở cửa tự động thông qua servo hoặc motor bước.
+When the camera recognizes a valid person, the system will activate the automatic door opening mechanism via servo or stepper motor.
 
-✅ 2. Phát hiện người – Cảnh báo xâm nhập
-Áp dụng mô hình YOLOv8n, đã được fine-tune lại trên dữ liệu thực tế thu thập tại khu vực để xe với điều kiện ánh sáng yếu (ban đêm, thiếu sáng…).
+✅ 2. Human Detection - Intrusion Warning
+Applying the YOLOv8n model, which has been fine-tuned on real data collected in parking areas with low light conditions (night, low light, etc.).
 
-Ảnh được tự thu thập thủ công từ camera giám sát, sau đó được gán nhãn (labeling) bằng công cụ Roboflow để chuẩn bị cho quá trình huấn luyện lại mô hình.
+Images are manually collected from surveillance cameras, then labeled using the Roboflow tool to prepare for the model retraining process.
 
-Khi phát hiện có người di chuyển bất thường trong khu vực ngoài giờ cho phép, hệ thống sẽ gửi cảnh báo và có thể ghi lại video/tắt mở đèn cảnh báo.
+When detecting people moving abnormally in the area outside of allowed hours, the system will send a warning and can record video/turn on/off warning lights.
 
-✅ 3. Nhận diện giọng nói – Điều khiển thiết bị
-Hệ thống hỗ trợ điều khiển bằng giọng nói thông qua mô hình nhận dạng tiếng nói offline VOSK, sử dụng gói tiếng Việt có sẵn.
+✅ 3. Voice recognition – Device control
+The system supports voice control through the VOSK offline voice recognition model, using the available Vietnamese package.
 
-Người dùng có thể ra lệnh bằng tiếng Việt để bật/tắt đèn, cửa, còi báo, hoặc thực hiện các tác vụ cơ bản mà không cần dùng tay.
-
+Users can give commands in Vietnamese to turn on/off lights, doors, sirens, or perform basic tasks without using their hands.
 
 # Client:
 ## React + TypeScript + Vite
