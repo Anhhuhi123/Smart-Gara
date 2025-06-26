@@ -1,13 +1,26 @@
 # Tổng quan dự án
-Hệ thống gara xe thông minh được xây dựng với mục tiêu tự động hóa việc kiểm soát và bảo vệ khu vực để xe tại gia đình, nhà trọ hoặc khu dân cư nhỏ. Hệ thống sử dụng Raspberry Pi 4 làm trung tâm điều khiển, kết hợp với các mô hình AI hiện đại để thực hiện 3 chức năng chính:
+Dự án được xây dựng với mục tiêu tự động hóa việc kiểm soát và bảo vệ khu vực để xe tại các hộ gia đình, nhà trọ, hoặc khu dân cư nhỏ, bằng cách ứng dụng Trí tuệ nhân tạo (AI) kết hợp với các thiết bị phần cứng chi phí thấp.
 
-- Nhận diện khuôn mặt: Xác thực người dùng hợp lệ để mở cửa tự động (sử dụng thư viện face_recognition với mô hình ResNet-34).
+Hệ thống sử dụng Raspberry Pi 4 làm trung tâm điều khiển, kết nối với nhiều thiết bị như camera, vi điều khiển Arduino, cảm biến, đèn và động cơ. Ba chức năng AI chính bao gồm:
 
-- Phát hiện người: Cảnh báo khi có người lạ xâm nhập bằng mô hình YOLOv8n đã fine-tune cho điều kiện ánh sáng yếu.
+✅ 1. Nhận diện khuôn mặt – Mở cửa tự động
+Sử dụng thư viện face_recognition với mô hình backbone ResNet-34 để trích xuất embedding khuôn mặt và so sánh.
 
-- Nhận diện giọng nói: Điều khiển thiết bị như đèn, cửa, còi bằng lệnh thoại, sử dụng mô hình nhận dạng tiếng nói VOSK.
+Để đảm bảo độ chính xác cao, người dùng hợp lệ cần cung cấp từ 5–10 ảnh khuôn mặt trong điều kiện ánh sáng tốt và rõ nét.
 
-Ngoài ra, hệ thống còn được tích hợp với các thiết bị như Arduino, động cơ servo, động cơ bước, đèn LED, buzzer và có giao diện web điều khiển từ xa qua mạng. Giải pháp có tính mở rộng cao, chi phí thấp và dễ dàng triển khai thực tế trong môi trường gia đình hoặc bán chuyên nghiệp.
+Khi camera nhận diện được người hợp lệ, hệ thống sẽ kích hoạt cơ cấu mở cửa tự động thông qua servo hoặc motor bước.
+
+✅ 2. Phát hiện người – Cảnh báo xâm nhập
+Áp dụng mô hình YOLOv8n, đã được fine-tune lại trên dữ liệu thực tế thu thập tại khu vực để xe với điều kiện ánh sáng yếu (ban đêm, thiếu sáng…).
+
+Ảnh được tự thu thập thủ công từ camera giám sát, sau đó được gán nhãn (labeling) bằng công cụ Roboflow để chuẩn bị cho quá trình huấn luyện lại mô hình.
+
+Khi phát hiện có người di chuyển bất thường trong khu vực ngoài giờ cho phép, hệ thống sẽ gửi cảnh báo và có thể ghi lại video/tắt mở đèn cảnh báo.
+
+✅ 3. Nhận diện giọng nói – Điều khiển thiết bị
+Hệ thống hỗ trợ điều khiển bằng giọng nói thông qua mô hình nhận dạng tiếng nói offline VOSK, sử dụng gói tiếng Việt có sẵn.
+
+Người dùng có thể ra lệnh bằng tiếng Việt để bật/tắt đèn, cửa, còi báo, hoặc thực hiện các tác vụ cơ bản mà không cần dùng tay.
 
 
 # Client:
